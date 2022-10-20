@@ -7,6 +7,7 @@ public interface IMethodsService
 {
     Task<IEnumerable<Methods>> ListAsync();
     Task<Methods> FindByType(string type);
+    Task<Methods> FindById(long id);
     Task<MethodsResponse> Create(Methods methods);
     Task<MethodsResponse> Delete(long id);
 }
