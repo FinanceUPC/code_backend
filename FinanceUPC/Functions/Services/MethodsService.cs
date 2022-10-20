@@ -30,6 +30,11 @@ public class MethodsService: IMethodsService
         return await _methodsRepository.FindByMethodType(type);
     }
 
+    public Task<Methods> FindById(long id)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<MethodsResponse> Create(Methods methods)
     {
         var userExist = await _userRepository.FindByIdAsync(methods.UserId);
