@@ -3,13 +3,13 @@ using FinanceUPC.Shared.Domain.Services.Communication;
 
 namespace FinanceUPC.Functions.Domain.Services.Communication;
 
-public class GermanResponse: BaseResponse<German>
+public class ConversionResponse: BaseResponse<Conversion>
 {
-    public GermanResponse(German resource) : base(resource)
+    public ConversionResponse(Conversion resource) : base(resource)
     {
     }
 
-    public GermanResponse(string message) : base(message)
+    public ConversionResponse(string message) : base(message)
     {
     }
 }

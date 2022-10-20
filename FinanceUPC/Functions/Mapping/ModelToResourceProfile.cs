@@ -7,6 +7,8 @@ public class ModelToResourceProfile: AutoMapper.Profile
 {
     public ModelToResourceProfile()
     {
-        CreateMap<Methods, MethodsResouse>();
+        CreateMap<Methods, MethodsResource>();
+        CreateMap<German, GermanResource>();
+        CreateMap<Conversion, GermanResource>();
     }
 }
