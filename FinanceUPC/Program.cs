@@ -1,4 +1,8 @@
 using FinanceUPC.API.Shared.Persistence.Repositories;
+using FinanceUPC.Functions.Domain.Repositories;
+using FinanceUPC.Functions.Domain.Services;
+using FinanceUPC.Functions.Persistences.Repositories;
+using FinanceUPC.Functions.Services;
 using FinanceUPC.Security.Authorization.Handlers.Implementations;
 using FinanceUPC.Security.Authorization.Handlers.Interfaces;
 using FinanceUPC.Security.Authorization.Middleware;
@@ -85,7 +89,14 @@ builder.Services.AddCors();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Learning Injection Configuration
-
+builder.Services.AddScoped<IMethodsService, MethodsService>();
+builder.Services.AddScoped<IMethodsRepository, MethodsRepository>();
+builder.Services.AddScoped<IGermanService, GermanService>();
+builder.Services.AddScoped<IGermanRepository, GermanRepository>();
+builder.Services.AddScoped<IConversionService, ConversionsService>();
+builder.Services.AddScoped<IConversionsRepository, ConversionsRepository>();
+builder.Services.AddScoped<IValuesRepository, ValuesRepository>();
+builder.Services.AddScoped<IValuesService, ValuesService>();
 // Security Injection Configuration
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
