@@ -9,6 +9,7 @@ public class Methods
     
     public User User { get; set; }
     public long UserId { get; set; }
-    public German German { get; set; } = new German();
-    public Conversion Conversion { get; set; } = new Conversion();
+    public List<German> German { get; set; } = new List<German>();
+    public List<Conversion> Conversion { get; set; } = new List<Conversion>();
+    public List<Values> Values { get; set; } = new List<Values>();
 }

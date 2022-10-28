@@ -41,9 +41,9 @@ public class MethodsController: ControllerBase
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var businessProjectResource = _mapper.Map<Methods, MethodsResource>(result.Resource);
+        var methodsResource = _mapper.Map<Methods, MethodsResource>(result.Resource);
 
-        return Ok(businessProjectResource);
+        return Ok(methodsResource);
     } 
     [HttpPost]
     public async Task<IActionResult> PostAsync([FromBody] SaveMethodsResource resource)
@@ -52,13 +52,11 @@ public class MethodsController: ControllerBase
             return BadRequest(ModelState.GetErrorMessages());
 
         var methods = _mapper.Map<SaveMethodsResource, Methods>(resource);
-
+        
         var result = await _methodsService.Create(methods);
-
         if (!result.Success)
             return BadRequest(result.Message);
-
-        var clientResource = _mapper.Map<Methods, IMethodsService>(result.Resource);
+        var clientResource = _mapper.Map<Methods, MethodsResource>(result.Resource);
         return Ok(clientResource);
     }
 }
