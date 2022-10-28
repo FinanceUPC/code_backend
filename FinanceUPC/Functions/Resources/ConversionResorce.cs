@@ -1,6 +1,6 @@
 namespace FinanceUPC.Functions.Resources;
 
-public class ConversionsResource
+public class ConversionResource
 {
     public long Id { get; set; }
     public string Type { get; set; }

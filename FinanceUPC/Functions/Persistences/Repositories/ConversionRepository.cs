@@ -15,14 +15,14 @@ public class ConversionsRepository: BaseRepository, IConversionsRepository
     public async Task<IEnumerable<Conversion>> ListAsync()
     {
         return await _context.Conversions
-            .Include(p => p.MethodId)
+            .Include(p => p.Methods)
             .ToListAsync();
     }
 
     public async Task<Conversion> FindByConversionId(long id)
     {
         return await _context.Conversions
-            .Include(p => p.MethodId)
+            .Include(p => p.Methods)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 

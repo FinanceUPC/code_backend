@@ -10,5 +10,6 @@ public class ResourceToModelProfile:AutoMapper.Profile
         CreateMap<SaveMethodsResource, Methods>();
         CreateMap<SaveGermanResource, German>();
         CreateMap<SaveConversionsResource, Conversion>();
+        CreateMap<SaveValuesResource, Values>();
     }
 }

@@ -28,9 +28,9 @@ public class UserService : IUserService
 
     public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
     {
-        var user = await _userRepository.FindByUsernameAsync(request.Username);
-        Console.WriteLine($"Request: {request.Username}, {request.Password}");
-        Console.WriteLine($"User: {user.Id}, {user.FirstName}, {user.LastName}, {user.Username}, {user.PasswordHash}");
+        var user = await _userRepository.FindByEmailAsync(request.Email);
+        Console.WriteLine($"Request: {request.Email}, {request.Password}");
+        Console.WriteLine($"User: {user.Id}, {user.Name}, {user.LastName}, {user.Age}, {user.Email}, {user.PasswordHash}");
         
         // Validate 
         if (user == null || !BCryptNet.Verify(request.Password, user.PasswordHash))
@@ -42,7 +42,7 @@ public class UserService : IUserService
         Console.WriteLine("Authentication successful. About to generate token");
         // Authentication successful
         var response = _mapper.Map<AuthenticateResponse>(user);
-        Console.WriteLine($"Response: {response.Id}, {response.FirstName}, {response.LastName}, {response.Username}");
+        Console.WriteLine($"User: {user.Id}, {user.Name}, {user.LastName}, {user.Age}, {user.Email}, {user.PasswordHash}");
         response.Token = _jwtHandler.GenerateToken(user);
         Console.WriteLine($"Generated token is {response.Token}");
         return response;
@@ -63,8 +63,8 @@ public class UserService : IUserService
     public async Task RegisterAsync(RegisterRequest request)
     {
         // Validate if Username is already taken
-        if (_userRepository.ExistsByUsername(request.Username))
-            throw new AppException($"Username '{request.Username}' is already taken");
+        if (_userRepository.ExistsByEmail(request.Email))
+            throw new AppException($"Username '{request.Email}' is already taken");
         
         // Map Request to User Object
         var user = _mapper.Map<User>(request);
@@ -87,11 +87,11 @@ public class UserService : IUserService
     public async Task UpdateAsync(int id, UpdateRequest request)
     {
         var user = GetById(id);
-        var userWithUsername = await _userRepository.FindByUsernameAsync(request.Username);
+        var userWithUsername = await _userRepository.FindByEmailAsync(request.Email);
 
         // Validate if user is changing username and it is already taken
         if (userWithUsername != null && user.Id != userWithUsername.Id)
-            throw new AppException($"Username '{request.Username}' is already taken");
+            throw new AppException($"Username '{request.Email}' is already taken");
         
         // Hash password if it was entered
         if (!string.IsNullOrEmpty(request.Password))
