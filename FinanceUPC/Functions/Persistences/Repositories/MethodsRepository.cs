@@ -15,21 +15,21 @@ public class MethodsRepository: BaseRepository, IMethodsRepository
     public async Task<IEnumerable<Methods>> ListAsync()
     {
         return await _context.Methods
-            .Include(p => p.UserId)
+            .Include(p => p.User)
             .ToListAsync();
     }
 
     public async Task<Methods> FindByMethodId(long id)
     {
         return await _context.Methods
-            .Include(p => p.UserId)
+            .Include(p => p.User)
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task<Methods> FindByMethodType(string type)
     {
         return await _context.Methods
-            .Include(p => p.UserId)
+            .Include(p => p.User)
             .FirstOrDefaultAsync(p => p.Type == type);
     }
 

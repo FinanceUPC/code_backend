@@ -2,6 +2,7 @@ using FinanceUPC.Functions.Domain.Models;
 using FinanceUPC.Functions.Domain.Repositories;
 using FinanceUPC.Functions.Domain.Services;
 using FinanceUPC.Functions.Domain.Services.Communication;
+using FinanceUPC.Security.Domain.Repositories;
 using FinanceUPC.Shared.Domain.Repositories;
 
 namespace FinanceUPC.Functions.Services;
@@ -9,14 +10,14 @@ namespace FinanceUPC.Functions.Services;
 public class GermanService: IGermanService
 {
     private readonly IGermanRepository _germanRepository;
-    private readonly IMethodsRepository _methodsRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserRepository _userRepository;
 
-    public GermanService(IGermanRepository germanRepository, IMethodsRepository methodsRepository, IUnitOfWork unitOfWork)
+    public GermanService(IGermanRepository germanRepository, IUnitOfWork unitOfWork, IUserRepository userRepository)
     {
         _germanRepository = germanRepository;
-        _methodsRepository = methodsRepository;
         _unitOfWork = unitOfWork;
+        _userRepository = userRepository;
     }
 
     public async Task<IEnumerable<German>> ListAsync()
@@ -29,11 +30,16 @@ public class GermanService: IGermanService
         return await _germanRepository.FindByGermanId(id);
     }
 
+    public async Task<IEnumerable<German>> ListByUserId(long id)
+    {
+        return await _germanRepository.ListByUserId(id);
+    }
+
     public async Task<GermanResponse> Create(German german)
     {
-        var methodExist = await _methodsRepository.FindByMethodId(german.MethodId);
-        if (methodExist == null)
-            return new GermanResponse("The method is not exist");
+        var existingUser = await _userRepository.FindByIdAsync(german.UserId);
+        if (existingUser == null)
+            return new GermanResponse("Invalid user");
         try
         {
             await _germanRepository.Add(german);

@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     public DbSet<Methods> Methods { get; set; }
     public DbSet<German> Germans { get; set; }
     public DbSet<Conversion> Conversions { get; set; }
+    public DbSet<Values> Values { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -23,9 +24,10 @@ public class AppDbContext : DbContext
         builder.Entity<User>().ToTable("Users");
         builder.Entity<User>().HasKey(p => p.Id);
         builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(30);
-        builder.Entity<User>().Property(p => p.FirstName).IsRequired();
-        builder.Entity<User>().Property(p => p.LastName).IsRequired();
+        builder.Entity<User>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+        builder.Entity<User>().Property(p => p.Email).IsRequired();
+        builder.Entity<User>().Property(p => p.Age).IsRequired();
+        builder.Entity<User>().Property(p => p.Email).IsRequired();
         
         builder.Entity<User>()
             .HasMany(p => p.Methods)
@@ -38,24 +40,45 @@ public class AppDbContext : DbContext
         builder.Entity<Methods>().Property(p => p.Type).IsRequired().HasMaxLength(50);
         builder.Entity<Methods>().Property(p => p.UserId).IsRequired();
 
-        builder.Entity<Methods>()
-            .HasOne(p => p.German)
-            .WithOne(p => p.Methods)
-            .HasForeignKey<German>(p => p.MethodId);
+        builder.Entity<User>()
+            .HasMany(p => p.Germans)
+            .WithOne(p => p.User)
+            .HasForeignKey(p => p.UserId);
         
         builder.Entity<German>().ToTable("Germans");
         builder.Entity<German>().HasKey(p => p.Id);
         builder.Entity<German>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<German>().Property(p => p.Amount).IsRequired().HasMaxLength(50);
-        builder.Entity<German>().Property(p => p.MonthlyInterest).IsRequired();
-        builder.Entity<German>().Property(p => p.InterestRate).IsRequired();
+        builder.Entity<German>().Property(p => p.CreatedAt).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.Transmitter).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.TotalI).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.TotalF).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.PartialI).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.PartialF).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.Receptor).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.Price).IsRequired().HasMaxLength(50);
+        builder.Entity<German>().Property(p => p.Years).IsRequired();
+        builder.Entity<German>().Property(p => p.Frequent).IsRequired();
+        builder.Entity<German>().Property(p => p.Days).IsRequired();
+        builder.Entity<German>().Property(p => p.TEA).IsRequired();
+        builder.Entity<German>().Property(p => p.IGV).IsRequired();
+        builder.Entity<German>().Property(p => p.Rent).IsRequired();
+        builder.Entity<German>().Property(p => p.Buyback).IsRequired();
+        builder.Entity<German>().Property(p => p.Notarial).IsRequired();
+        builder.Entity<German>().Property(p => p.Registral).IsRequired();
+        builder.Entity<German>().Property(p => p.Tasation).IsRequired();
+        builder.Entity<German>().Property(p => p.Study).IsRequired();
+        builder.Entity<German>().Property(p => p.Active).IsRequired();
         builder.Entity<German>().Property(p => p.Period).IsRequired();
-        builder.Entity<German>().Property(p => p.MethodId).IsRequired();
+        builder.Entity<German>().Property(p => p.Risk).IsRequired();
+        builder.Entity<German>().Property(p => p.COK).IsRequired();
+        builder.Entity<German>().Property(p => p.WACC).IsRequired();
+        
+        
 
         builder.Entity<Methods>()
-            .HasOne(p => p.Conversion)
+            .HasMany(p => p.Conversion)
             .WithOne(p => p.Methods)
-            .HasForeignKey<Conversion>(p => p.MethodId);
+            .HasForeignKey(p => p.MethodId);
         
         builder.Entity<Conversion>().ToTable("Conversions");
         builder.Entity<Conversion>().HasKey(p => p.Id);
@@ -68,6 +91,23 @@ public class AppDbContext : DbContext
         builder.Entity<Conversion>().Property(p => p.EffectiveRateRequired).IsRequired();
         builder.Entity<Conversion>().Property(p => p.Result).IsRequired();
         builder.Entity<Conversion>().Property(p => p.MethodId).IsRequired();
+
+        builder.Entity<Methods>()
+            .HasMany(p => p.Values)
+            .WithOne(p => p.Methods)
+            .HasForeignKey(p => p.MethodId);
+        
+        builder.Entity<Values>().ToTable("Values");
+        builder.Entity<Values>().HasKey(p => p.Id);
+        builder.Entity<Values>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Values>().Property(p => p.ExchangeRate).IsRequired().HasMaxLength(50);
+        builder.Entity<Values>().Property(p => p.FutureValue).IsRequired();
+        builder.Entity<Values>().Property(p => p.EffectiveRateTerm).IsRequired();
+        builder.Entity<Values>().Property(p => p.EffectiveRate).IsRequired();
+        builder.Entity<Values>().Property(p => p.InitialDate).IsRequired();
+        builder.Entity<Values>().Property(p => p.FinalDate).IsRequired();
+        builder.Entity<Values>().Property(p => p.Result).IsRequired();
+        builder.Entity<Values>().Property(p => p.MethodId).IsRequired();
 
         // Apply Naming Conventions
         builder.UseSnakeCaseNamingConvention();

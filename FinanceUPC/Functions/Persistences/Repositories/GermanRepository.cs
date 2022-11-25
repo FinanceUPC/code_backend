@@ -15,15 +15,21 @@ public class GermanRepository: BaseRepository, IGermanRepository
     public async Task<IEnumerable<German>> ListAsync()
     {
         return await _context.Germans
-            .Include(p => p.Methods)
+            .Include(p => p.User)
             .ToListAsync();
     }
 
     public async Task<German> FindByGermanId(long id)
     {
         return await _context.Germans
-            .Include(p => p.Methods)
-            .FirstOrDefaultAsync(p=>p.Id == id);
+            .Include(p => p.User)
+            .FirstOrDefaultAsync(p=>p.UserId == id);
+    }
+    public async Task<IEnumerable<German>> ListByUserId(long id)
+    {
+        return await _context.Germans.Where(p => p.UserId == id)
+            .Include(p => p.User)
+            .ToListAsync();
     }
 
     public async Task Add(German german)

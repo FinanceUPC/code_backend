@@ -6,6 +6,7 @@ namespace FinanceUPC.Functions.Domain.Services;
 public interface IGermanService
 {
     Task<IEnumerable<German>> ListAsync();
+    Task<IEnumerable<German>> ListByUserId(long id);
     Task<German> ListById(long id);
     Task<GermanResponse> Create(German german);
     Task<GermanResponse> Delete(long id);

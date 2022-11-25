@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SETTING\\Documents\\Ciclo 6 UPC\\Finanzas\\TRABAJO\\FinanceUPC\\FinanceUPC\\FinanceUPC.csproj": {}
+    "C:\\Users\\Luis\\Downloads\\finanzas\\code_backend-develop\\FinanceUPC\\FinanceUPC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SETTING\\Documents\\Ciclo 6 UPC\\Finanzas\\TRABAJO\\FinanceUPC\\FinanceUPC\\FinanceUPC.csproj": {
+    "C:\\Users\\Luis\\Downloads\\finanzas\\code_backend-develop\\FinanceUPC\\FinanceUPC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SETTING\\Documents\\Ciclo 6 UPC\\Finanzas\\TRABAJO\\FinanceUPC\\FinanceUPC\\FinanceUPC.csproj",
+        "projectUniqueName": "C:\\Users\\Luis\\Downloads\\finanzas\\code_backend-develop\\FinanceUPC\\FinanceUPC.csproj",
         "projectName": "FinanceUPC",
-        "projectPath": "C:\\Users\\SETTING\\Documents\\Ciclo 6 UPC\\Finanzas\\TRABAJO\\FinanceUPC\\FinanceUPC\\FinanceUPC.csproj",
-        "packagesPath": "C:\\Users\\SETTING\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SETTING\\Documents\\Ciclo 6 UPC\\Finanzas\\TRABAJO\\FinanceUPC\\FinanceUPC\\obj\\",
+        "projectPath": "C:\\Users\\Luis\\Downloads\\finanzas\\code_backend-develop\\FinanceUPC\\FinanceUPC.csproj",
+        "packagesPath": "C:\\Users\\Luis\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Luis\\Downloads\\finanzas\\code_backend-develop\\FinanceUPC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SETTING\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Luis\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,7 +91,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -103,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
